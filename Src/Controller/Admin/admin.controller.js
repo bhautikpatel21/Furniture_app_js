@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 
 exports.registerAdmin = async(req, res) => {
     try {
-        let admin = await userService.getUser({ email: req.body.email });
+        let admin = await userService.getUser({ email : req.body.email });
         console.log(admin);
         if(admin){
             return res.status(400).json({ message: `Admin is Already Registerd...`});
@@ -99,40 +99,3 @@ exports.deleteAdmin = async(req, res) => {
         res.status(500).json({ message: `Internal Server Error..${console.error()}`});
     }
 };
-
-exports.updatePassword = async(req, res) => {
-    try {
-        let admin = await userService.getUserById(req.query.adminId);
-        if(!admin){
-            return res.json({ message: `Admin Not Found...`});
-        }
-        let comparePassword = await bcrypt.compare(req.body.oldPassword, req.admin.password);
-        let oldPassword = req.body.oldPassword;
-        if(!oldPassword){
-            return res.json({ message: `Old Password is not Found...`});
-        }
-        if(!comparePassword){
-            return res.json({ message: `Old Password is not match...`});
-        }
-        let newPassword = req.body.newPassword;
-        if(!newPassword){
-            return res.json({ message:`New Password is Not Found...`});
-        }
-        if(newPassword === oldPassword){
-            return res.json({ message: `Old Password and New Password Are Same Please Enter Diffrent Password.`});
-        }
-        let confirmPassword = req.body.confirmPassword;
-        if(!confirmPassword){
-            return res.json({ message:`Confirm Password is Not Found...`});
-        }
-        if(newPassword !== confirmPassword){
-            return res.json({ message: `New Password and Confirm  Password are not same.` });
-        }
-        let hashPassword = await bcrypt.hash(newPassword, 10);
-        admin = await userService.updateUser(req.admin._id, { password: hashPassword});
-        res.status(200).json({ message: 'Password changed successfully...' });
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ message: `Internal Server Error..${console.error()}`});
-    }
-}

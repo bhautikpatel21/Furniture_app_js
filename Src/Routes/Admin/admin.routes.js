@@ -8,7 +8,6 @@ const {
     getAdmin,
     updateAdmin,
     deleteAdmin,
-    updatePassword
 } = require('../../Controller/Admin/admin.controller');
 
 userRoutes.post('/register-Admin',registerAdmin);
@@ -23,6 +22,5 @@ userRoutes.put('/update-Admin',adminVerifyToken, updateAdmin);
 
 userRoutes.delete('/delete-Admin',adminVerifyToken, deleteAdmin);
 
-userRoutes.put('/update-Password',adminVerifyToken, updatePassword);
 
 module.exports = userRoutes; 
