@@ -5,8 +5,8 @@ exports.getAllCart = async (req, res) => {
   try {
     let carts = await cartService
       .getAllCart({ isDelete: false })
-      .populate("user")
-      .populate("cartItem");
+      // .populate("user")
+      // .populate("cartItem");
     res.status(200).json(carts);
   } catch (error) {
     console.log(error);

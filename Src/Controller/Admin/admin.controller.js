@@ -40,7 +40,7 @@ exports.loginAdmin = async(req, res) => {
         res.status(200).json({ token, message: `Admin Login SuccesFully...`});
     } catch (error) {
         console.log(error);
-        res.status(500).json({ message: `Internal Server Error..${console.error()}`});
+        res.status(500).json({ message: `Internal Server Error..`});
     }
 };
 
