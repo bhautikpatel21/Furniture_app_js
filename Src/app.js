@@ -9,11 +9,11 @@ const imagePath = path.join(__dirname,'images');
 app.use('/images',express.static(imagePath));
 
 
-const adminRoutes = require('./Src/Routes/Admin/index.routes');
+const adminRoutes = require('./Routes/Admin/index.routes');
 app.use('/api/admin', adminRoutes);
 
 
-const usersRoute = require('./Src/Routes/User/index.routes');
+const usersRoute = require('./Routes/User/index.routes');
 app.use('/api/user', usersRoute);
 
 
